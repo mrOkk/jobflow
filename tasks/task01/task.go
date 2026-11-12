@@ -1,10 +1,6 @@
-package tasks
+package task01
 
-import (
-	"fmt"
-	"sync"
-)
-
+// https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-01--lost-counter
 // BUG:
 // нет гарантии корректного подсчета из-за гонки данных
 //
@@ -16,7 +12,12 @@ import (
 //
 // GUARANTEE:
 // В случае с мьютексом мы по сути выстраиваем очередь выполнения
-func Task01() {
+import (
+	"fmt"
+	"sync"
+)
+
+func Do() {
 	const goroutines = 1000
 	const increments = 1000
 

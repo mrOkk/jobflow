@@ -1,20 +1,11 @@
 package main
 
 import (
-	"concurrency/tasks"
+	"concurrency/tasks/task04"
 	"fmt"
 )
 
 func main() {
-	tasks.Task03()
+	task04.Do()
 	fmt.Println("Done!")
 }
-
-// BUG:
-//
-//
-// FIX:
-//
-//
-// GUARANTEE:
-//

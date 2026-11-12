@@ -1,11 +1,6 @@
-package tasks
+package task02
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
-
+// https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-02--waitgroup-never-ends
 // BUG:
 // waitGroup передается по значению
 // соответственно внутренний счетчик уменьшается не у того инстанса, у которого увеличивается
@@ -25,6 +20,11 @@ import (
 // указатель указывает на одну область в памяти
 // так что если сходится добавляемое количество с количеством вызовов wg.Done()
 // то все отработает как надо
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 type Result struct {
 	URL    string
@@ -46,7 +46,7 @@ func fetch(
 	}
 }
 
-func Task02() {
+func Do() {
 	urls := []string{
 		"https://google.com",
 		"https://github.com",
