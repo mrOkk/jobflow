@@ -1,6 +1,7 @@
 package task02
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-02--waitgroup-never-ends
+// STATUS: TO REVIEW
 // BUG:
 // waitGroup передается по значению
 // соответственно внутренний счетчик уменьшается не у того инстанса, у которого увеличивается

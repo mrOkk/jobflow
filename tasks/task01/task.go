@@ -1,6 +1,7 @@
 package task01
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-01--lost-counter
+// STATUS: TO REVIEW
 // BUG:
 // нет гарантии корректного подсчета из-за гонки данных
 //

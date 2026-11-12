@@ -1,6 +1,7 @@
 package task03
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-03--worker-pool-deadlock
+// STATUS: TO REVIEW
 // BUG:
 // Вижу 2 проблемы (вторую осознал не сразу)
 // 1. Чтение данных из канала по рэнджу, но при этом каналы никто не закрывает
