@@ -1,15 +1,21 @@
 package task04
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-04--fake-backpressure
-// STATUS: IN PROGRESS
+// STATUS: TO REVIEW
 // BUG:
 // Опасная конструкция: запись в канал из горутины, а сразу после закрытие
 // Здесь скорее всего получим панику записи в закрытый канал
+// еще в условии говорится Исправьте программу так, чтобы количество входных Job не превращалось в количество созданных goroutines
+// это будет второй частью фикса
 //
 // FIX:
 // Добавить wait group на запись в канал и закрывать канал только после окончания
 // лучше в отдельной горутине
-// (Судя по описанию, не это требуется)
+//
+// Для второй части я думаю добавить семафор
+// Как понимаю, для go наиболее идеоматичный вариант - это буфферезированный канал
+// Сделаем его на тоже число элементов, что и размер очереди работ
+//
 // GUARANTEE:
 //
 import (
@@ -40,6 +46,7 @@ func Do() {
 	const jobsCount = 1_000
 
 	jobs := make(chan Job, queueSize)
+	sem := make(chan struct{}, queueSize)
 
 	var wg sync.WaitGroup
 	wg.Add(workers)
@@ -52,12 +59,16 @@ func Do() {
 
 	for i := 0; i < jobsCount; i++ {
 		job := Job{ID: i}
+		sem <- struct{}{}
 
 		go func() {
 			defer jwg.Done()
 			jobs <- job
+			<-sem
 		}()
 	}
+
+	close(sem)
 
 	go func() {
 		jwg.Wait()
