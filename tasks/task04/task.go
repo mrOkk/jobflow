@@ -43,7 +43,7 @@ func worker(
 func Do() {
 	const workers = 4
 	const queueSize = 8
-	const jobsCount = 1_000
+	const jobsCount = 100_000
 
 	jobs := make(chan Job, queueSize)
 	sem := make(chan struct{}, queueSize)
