@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "concurrency/tasks/task10"
+	. "concurrency/tasks/task11"
 	"fmt"
 )
 
