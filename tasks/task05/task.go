@@ -1,7 +1,7 @@
 package task05
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-05--pipeline-that-never-finishes
-// STATUS: TO REVIEW
+// STATUS: READY FOR REVIEW
 // BUG:
 // Не закрываются каналы, соответственно нет выхода из циклов, горутины зависают
 // FIX:

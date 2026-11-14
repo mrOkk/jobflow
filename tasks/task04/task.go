@@ -1,7 +1,7 @@
 package task04
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-04--fake-backpressure
-// STATUS: TO REVIEW
+// STATUS: READY FOR REVIEW
 // BUG:
 // Опасная конструкция: запись в канал из горутины, а сразу после закрытие
 // Здесь скорее всего получим панику записи в закрытый канал

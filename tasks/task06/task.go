@@ -1,7 +1,7 @@
 package task06
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-06--stop-all-workers
-// STATUS: TO REVIEW
+// STATUS: READY FOR REVIEW
 // BUG:
 // Запись в канал дает возможность прочитать значение только в 1 горутине
 // Соответственно, другие не обработают "событие" остановки

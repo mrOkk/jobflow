@@ -1,7 +1,7 @@
 package task07
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-07--broken-fan-in
-// STATUS: TO REVIEW
+// STATUS: READY FOR REVIEW
 // BUG:
 // Во время слияния канал out закрывается в каждом вызове CopyValues
 // Это гарантированно приводит к панике
