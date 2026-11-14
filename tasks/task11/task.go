@@ -1,7 +1,7 @@
 package task11
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-11--shutdown-means-finished
-// STATUS: IN PROGRESS
+// STATUS: READY FOR REVIEW
 // BUG:
 // Исходя из контракта, выделю 2 проблемных момента
 // 1. Конкретно в этом код оно не используется, но описано в доп сценарии
