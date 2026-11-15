@@ -1,13 +1,16 @@
 package task12
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-12---initialize-exactly-once
-// STATUS: TODO
+// STATUS: READY FOR REVIEW
 // BUG:
-//
+// На получение клиента нет никакой синхронизакии, при этом операция тяжелая,
+// возникает гонка данных, данные много раз перетираются,
+// один вызов может получить отличное от другого значения
 // FIX:
-//
+// sync.Once для создания экземпляра вместо проверки на null
 // GUARANTEE:
-//
+// sync.Once гарантированно выполняется только один раз, так что мы ни
+// при каких обстаятельствах не можем получить отличающиеся значения
 import (
 	"fmt"
 	"sync"
@@ -19,15 +22,16 @@ type Client struct {
 }
 
 var client *Client
+var once sync.Once
 
 func getClient() *Client {
-	if client == nil {
+	once.Do(func() {
 		time.Sleep(100 * time.Millisecond)
 
 		client = &Client{
 			ID: 42,
 		}
-	}
+	})
 
 	return client
 }
