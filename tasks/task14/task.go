@@ -1,15 +1,24 @@
 package task14
 
 // https://github.com/xakepp35/go_backend_combat/blob/main/combat/03_CONCURRENCY.md#task-14---race-free-but-still-wrong
-// STATUS: TODO
+// STATUS: READY FOR REVIEW
 // BUG:
-//
+// У нас как будто бы при установки Complete выполняется тяжелая операция.
+// В процессе горутина передает управление, в этот момент pending
+// уже уменьшен, а done еще не увеличен
 //
 // FIX:
+// Мне пока пришло в голову только переработать структуру Stats:
+// убрать pending, а сделать обычный целочисленный total,
+// и в стэпшоте получать pending как total - done
+// А из операций оставить только s.done.Add(1)
+// 2 изменяемых поля pending и done избыточны для такой структуры
+// В этом случае проверка теряет смысл.
 //
+// Либо еще вариант получать снэпшот и менять значения под единым мьютексом
 //
 // GUARANTEE:
-//
+// Получаем операцию только над одним полем, которая по настоящему атомарная
 import (
 	"fmt"
 	"runtime"
@@ -18,20 +27,18 @@ import (
 )
 
 type Stats struct {
-	pending atomic.Int64
-	done    atomic.Int64
+	total int64
+	done  atomic.Int64
 }
 
 func NewStats(total int64) *Stats {
 	s := &Stats{}
-	s.pending.Store(total)
+	s.total = total
 
 	return s
 }
 
 func (s *Stats) Complete() {
-	s.pending.Add(-1)
-
 	runtime.Gosched()
 
 	s.done.Add(1)
@@ -41,7 +48,9 @@ func (s *Stats) Snapshot() (
 	pending int64,
 	done int64,
 ) {
-	return s.pending.Load(), s.done.Load()
+	done = s.done.Load()
+	pending = s.total - done
+	return
 }
 
 func Do() {
